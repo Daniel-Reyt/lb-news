@@ -1,0 +1,10 @@
+ESX = exports['es_extended']:getSharedObject()
+ESX.RegisterServerCallback('addnews', function(source, cb, news)
+    local add = MySQL.query.await('INSERT INTO `ulife_news` (`title`, `description`, `message`) VALUES ("' ..
+        news.title .. '", "' .. news.description .. '", "' .. news.message .. '")')
+    cb(add)
+end)
+ESX.RegisterServerCallback('getnews', function(source, cb, news)
+    local news = MySQL.query.await('SELECT * FROM `ulife_news` ORDER BY `id` DESC')
+    cb(news)
+end)
