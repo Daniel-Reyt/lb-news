@@ -26,15 +26,25 @@ window.addEventListener('load', function (e) {
             `
         } else {
             for (let i = 0; i < data.news.length; i++) {
-                document.getElementById('body').innerHTML += `
-                <div class="card">
-                    <p class="card-title">${data.news[i].title}</p>
-                    <p class="card-description">${data.news[i].description}</p>
-                    <p class="card-message">${data.news[i].message}</p>
-                    <button class="button-delete" id="button-delete" onclick="Deletenews(${data.news[i].id})"><img src="assets/delete.png" class="icon"></button>
-                    <button class="button-edit" id="button-edit" onclick="Editnews(${i}, ${data.news[i].id})"><img src="assets/edit.png" class="icon"></button>
-                </div>
-                `
+                if (data.canEdit) {
+                    document.getElementById('body').innerHTML += `
+                    <div class="card">
+                        <p class="card-title">${data.news[i].title}</p>
+                        <p class="card-description">${data.news[i].description}</p>
+                        <p class="card-message">${data.news[i].message}</p>
+                        <button class="button-delete" id="button-delete" onclick="Deletenews(${data.news[i].id})"><img src="assets/delete.png" class="icon"></button>
+                        <button class="button-edit" id="button-edit" onclick="Editnews(${i}, ${data.news[i].id})"><img src="assets/edit.png" class="icon"></button>
+                    </div>
+                    `
+                } else {
+                    document.getElementById('body').innerHTML += `
+                    <div class="card">
+                        <p class="card-title">${data.news[i].title}</p>
+                        <p class="card-description">${data.news[i].description}</p>
+                        <p class="card-message">${data.news[i].message}</p>
+                    </div>
+                    `
+                }
             }
         }
     })
@@ -62,15 +72,25 @@ document.getElementById('button-addnews').addEventListener('click', () => {
                     `
                 } else {
                     for (let i = 0; i < data.news.length; i++) {
-                        document.getElementById('body').innerHTML += `
-                        <div class="card">
-                            <p class="card-title">${data.news[i].title}</p>
-                            <p class="card-description">${data.news[i].description}</p>
-                            <p class="card-message">${data.news[i].message}</p>
-                            <button class="button-delete" id="button-delete" onclick="Deletenews(${data.news[i].id})"><img src="assets/delete.png" class="icon"></button>
-                            <button class="button-edit" id="button-edit" onclick="Editnews(${i}, ${data.news[i].id})"><img src="assets/edit.png" class="icon"></button>
-                        </div>
-                        `
+                        if (data.canEdit) {
+                            document.getElementById('body').innerHTML += `
+                            <div class="card">
+                                <p class="card-title">${data.news[i].title}</p>
+                                <p class="card-description">${data.news[i].description}</p>
+                                <p class="card-message">${data.news[i].message}</p>
+                                <button class="button-delete" id="button-delete" onclick="Deletenews(${data.news[i].id})"><img src="assets/delete.png" class="icon"></button>
+                                <button class="button-edit" id="button-edit" onclick="Editnews(${i}, ${data.news[i].id})"><img src="assets/edit.png" class="icon"></button>
+                            </div>
+                            `
+                        } else {
+                            document.getElementById('body').innerHTML += `
+                            <div class="card">
+                                <p class="card-title">${data.news[i].title}</p>
+                                <p class="card-description">${data.news[i].description}</p>
+                                <p class="card-message">${data.news[i].message}</p>
+                            </div>
+                            `
+                        }
                     }
                 }
                 document.getElementById('form').style.display = 'none'
@@ -99,15 +119,25 @@ function Deletenews(id_news) {
                     `
                 } else {
                     for (let i = 0; i < data.news.length; i++) {
-                        document.getElementById('body').innerHTML += `
-                        <div class="card">
-                            <p class="card-title">${data.news[i].title}</p>
-                            <p class="card-description">${data.news[i].description}</p>
-                            <p class="card-message">${data.news[i].message}</p>
-                            <button class="button-delete" id="button-delete" onclick="Deletenews(${data.news[i].id})"><img src="assets/delete.png" class="icon"></button>
-                            <button class="button-edit" id="button-edit" onclick="Editnews(${i}, ${data.news[i].id})"><img src="assets/edit.png" class="icon"></button>
-                        </div>
-                        `
+                        if (data.canEdit) {
+                            document.getElementById('body').innerHTML += `
+                            <div class="card">
+                                <p class="card-title">${data.news[i].title}</p>
+                                <p class="card-description">${data.news[i].description}</p>
+                                <p class="card-message">${data.news[i].message}</p>
+                                <button class="button-delete" id="button-delete" onclick="Deletenews(${data.news[i].id})"><img src="assets/delete.png" class="icon"></button>
+                                <button class="button-edit" id="button-edit" onclick="Editnews(${i}, ${data.news[i].id})"><img src="assets/edit.png" class="icon"></button>
+                            </div>
+                            `
+                        } else {
+                            document.getElementById('body').innerHTML += `
+                            <div class="card">
+                                <p class="card-title">${data.news[i].title}</p>
+                                <p class="card-description">${data.news[i].description}</p>
+                                <p class="card-message">${data.news[i].message}</p>
+                            </div>
+                            `
+                        }
                     }
                 }
             })
@@ -152,15 +182,26 @@ document.getElementById('button-updatenews').addEventListener('click', () => {
                     `
                 } else {
                     for (let i = 0; i < data.news.length; i++) {
-                        document.getElementById('body').innerHTML += `
-                        <div class="card">
-                            <p class="card-title">${data.news[i].title}</p>
-                            <p class="card-description">${data.news[i].description}</p>
-                            <p class="card-message">${data.news[i].message}</p>
-                            <button class="button-delete" id="button-delete" onclick="Deletenews(${data.news[i].id})"><img src="assets/delete.png" class="icon"></button>
-                            <button class="button-edit" id="button-edit" onclick="Editnews(${i}, ${data.news[i].id})"><img src="assets/edit.png" class="icon"></button>
-                        </div>
-                        `
+                        if (data.canEdit) {
+                            document.getElementById('body').innerHTML += `
+                            <div class="card">
+                                <p class="card-title">${data.news[i].title}</p>
+                                <p class="card-description">${data.news[i].description}</p>
+                                <p class="card-message">${data.news[i].message}</p>
+                                <button class="button-delete" id="button-delete" onclick="Deletenews(${data.news[i].id})"><img src="assets/delete.png" class="icon"></button>
+                                <button class="button-edit" id="button-edit" onclick="Editnews(${i}, ${data.news[i].id})"><img src="assets/edit.png" class="icon"></button>
+                            </div>
+                            `
+                        } else {
+                            document.getElementById('body').innerHTML += `
+                            <div class="card">
+                                <p class="card-title">${data.news[i].title}</p>
+                                <p class="card-description">${data.news[i].description}</p>
+                                <p class="card-message">${data.news[i].message}</p>
+                            </div>
+                            `
+                        }
+
                     }
                 }
                 document.getElementById('form').style.display = 'none'
