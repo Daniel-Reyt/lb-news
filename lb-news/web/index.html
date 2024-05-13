@@ -18,25 +18,27 @@
     <div id="phone-wrapper">
         <div class="app">
             <div class="row row-title">
-                <h1 class="title">News</h1>
+                <h1 class="title" id="app-title"></h1>
                 <button class="button-add" id="button-add">+</button>
                 <button class="button-back" id="button-back">Back</button>
             </div>
             <div class="card-container" id="body">
             </div>
             <div class="card-container" id="form">
-                <h3 class="form-title"> Ajout de news</h3>
-                <input type="text" class="inp inp-text" placeholder="Titre" id="title-news-add">
-                <input type="text" class="inp inp-text" placeholder="Description" id="description-news-add">
-                <textarea type="text" class="inp inp-area" placeholder="Message" id="message-news-add"></textarea>
-                <button class="button-validate" id="button-addnews">Valider</button>
+                <h3 class="form-title" id="add-title"></h3>
+                <input type="text" class="inp inp-text" placeholder="" id="title-news-add">
+                <input type="text" class="inp inp-text" placeholder="" id="description-news-add">
+                <button type="text" class="inp inp-text" id="photo-news-add">Image</button>
+                <textarea type="text" class="inp inp-area" placeholder="" id="message-news-add"></textarea>
+                <button class="button-validate" id="button-addnews"></button>
             </div>
             <div class="card-container" id="form-update">
-                <h3 class="form-title"> Ajout de news</h3>
-                <input type="text" class="inp inp-text" placeholder="Titre" id="title-news-update">
-                <input type="text" class="inp inp-text" placeholder="Description" id="description-news-update">
-                <textarea type="text" class="inp inp-area" placeholder="Message" id="message-news-update"></textarea>
-                <button class="button-validate" id="button-updatenews">Valider</button>
+                <h3 class="form-title" id="update-title"></h3>
+                <input type="text" class="inp inp-text" placeholder="" id="title-news-update">
+                <input type="text" class="inp inp-text" placeholder="" id="description-news-update">
+                <button type="text" class="inp inp-text" id="photo-news-update">Image</button>
+                <textarea type="text" class="inp inp-area" placeholder="" id="message-news-update"></textarea>
+                <button class="button-validate" id="button-updatenews"></button>
             </div>
         </div>
     </div>
@@ -44,6 +46,7 @@
     <script src="dev.js"></script>
     <script src="https://cfx-nui-lb-phone/ui/components.js"></script>
     <script src="script.js"></script>
+    <style id="custom-style"></style>
 </body>
 
 </html>

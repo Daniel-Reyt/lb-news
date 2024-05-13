@@ -30,6 +30,11 @@ CreateThread(function()
         end
     end)
 end)
+RegisterNUICallback('getLocales', function(data, cb)
+    local lang = Config.lang
+    local locales = Config.locales[lang]
+    cb(locales)
+end)
 RegisterNUICallback('getDatas', function(data, cb)
     local xPlayer = ESX.GetPlayerData()
     ESX.TriggerServerCallback('getnews', function(news)
@@ -68,4 +73,14 @@ RegisterNUICallback('updateNews', function(data, cb)
             cb(false)
         end
     end, data)
+end)
+RegisterNUICallback('add-photos', function(data, cb)
+    exports['screenshot-basic']:requestScreenshotUpload(
+        'https://api.fivemanage.com/api/image?apiKey=' .. Config.APIKEYS.Photos, 'image', function(data)
+            local resp = json.decode(data)
+            if resp then
+                ESX.ShowNotification("Image Uploadée", 'success')
+                cb(resp.url)
+            end
+        end)
 end)
