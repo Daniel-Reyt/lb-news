@@ -6,6 +6,14 @@
 
 > the players can see the added news by the app
 
+### To update the script
+
+> clone the repository
+
+> delete the older 'lb-news' folder in your server
+
+> drop the new version of 'lb-news' folder to your server in standalone
+
 ### To install the script
 
 > clone the repository
@@ -23,6 +31,14 @@
 > Cette application vous permet de créer et ajouter des news grace au job avec le label 'news'
 
 > Les joueurs voit les news sur le téléphone
+
+### Pour mettre a jour le script
+
+> cloner le repository
+
+> supprimer l'ancien dossier 'lb-news' de votre server
+
+> déposer le nouveau dossier 'lb-news' a jour dans votre server dans standalone
 
 ### Pour installer le script
 
