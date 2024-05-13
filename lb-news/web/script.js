@@ -84,10 +84,10 @@ window.addEventListener('load', function (e) {
             }
             .button-validate {
                 background-color: ${locales.THEME.ADD_BACKGROUND} !important;
-                color: ${locales.THEME.UPDATE_BACKGROUND} !important;
+                color: ${locales.THEME.ADD_COLOR} !important;
             }
             .button-update {
-                background-color: ${locales.THEME.UPDATE_COLOR} !important;
+                background-color: ${locales.THEME.UPDATE_BACKGROUND} !important;
                 color: ${locales.THEME.UPDATE_COLOR} !important;
             }
         `
