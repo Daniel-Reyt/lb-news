@@ -120,6 +120,30 @@ body {
     cursor: pointer;
 }
 
+.button-delete {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    font-size: 30px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.button-edit {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    font-size: 30px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 .button-back {
     position: absolute;
     top: 55px;
@@ -144,6 +168,10 @@ body {
 }
 
 #form {
+    display: none;
+}
+
+#form-update {
     display: none;
 }
 
@@ -191,4 +219,9 @@ body {
     border: 1px solid green;
     background-color: rgb(0, 204, 51);
     color: black;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
 }

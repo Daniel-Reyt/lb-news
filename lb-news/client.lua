@@ -14,7 +14,7 @@ CreateThread(function()
             defaultApp = true,
             size = 59812,
             ui = GetCurrentResourceName() .. "/web/index.html",
-            icon = "https://cfx-nui-" .. GetCurrentResourceName() .. "/ui/assets/news.png"
+            icon = "https://cfx-nui-" .. GetCurrentResourceName() .. "/web/assets/news.png"
         })
 
         if not added then
@@ -45,6 +45,24 @@ end)
 RegisterNUICallback('addNews', function(data, cb)
     ESX.TriggerServerCallback('addnews', function(added)
         if added.affectedRows > 0 then
+            cb(true)
+        else
+            cb(false)
+        end
+    end, data)
+end)
+RegisterNUICallback('deleteNews', function(data, cb)
+    ESX.TriggerServerCallback('deleteNews', function(deleted)
+        if deleted.affectedRows > 0 then
+            cb(true)
+        else
+            cb(false)
+        end
+    end, data["id"])
+end)
+RegisterNUICallback('updateNews', function(data, cb)
+    ESX.TriggerServerCallback('updateNews', function(updated)
+        if updated.affectedRows > 0 then
             cb(true)
         else
             cb(false)
