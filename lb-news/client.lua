@@ -79,7 +79,7 @@ RegisterNUICallback('add-photos', function(data, cb)
         'https://api.fivemanage.com/api/image?apiKey=' .. Config.APIKEYS.Photos, 'image', function(data)
             local resp = json.decode(data)
             if resp then
-                ESX.ShowNotification("Image Uploadée", 'success')
+                ESX.ShowNotification(Config.locales[Config.lang].UPLOAD.SUCCESS, 'success')
                 cb(resp.url)
             end
         end)

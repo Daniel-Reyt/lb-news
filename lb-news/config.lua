@@ -39,6 +39,9 @@ Config.locales = {
             ADD_COLOR = "white",          -- white, black / according to your button color
             UPDATE_COLOR = "black",       -- white, black / according to your button color
             FORMINP_COLOR = "black"       -- white, black / according to your button color
+        },
+        UPLOAD = {
+            SUCCESS = "Image successfully uploaded"
         }
     },
     ["fr"] = {
@@ -79,6 +82,9 @@ Config.locales = {
             ADD_COLOR = "white",          -- white, black / according to your button color
             UPDATE_COLOR = "black",       -- white, black / according to your button color
             FORMINP_COLOR = "black"       -- white, black / according to your button color
+        },
+        UPLOAD = {
+            SUCCESS = "Image correctement uploadée"
         }
     }
 }
