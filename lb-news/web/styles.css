@@ -222,6 +222,14 @@ body {
     text-align: center;
 }
 
+.button-validate:hover {
+    cursor: pointer;
+}
+
+.button-update:hover {
+    cursor: pointer;
+}
+
 .icon {
     width: 40px;
     height: 40px;
