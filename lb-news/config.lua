@@ -83,7 +83,7 @@ Config.locales = {
     }
 }
 Config.APIKEYS = {
-    Photos = "CtXj82IG99AVGdmoxfH8xwa2eJoUVFr7",
-    Videos = "",
-    Audios = ""
+    Photos = "YOUR FIVEMANAGE APIKEY",
+    --Videos = "", NOT USED NOW - I search a method to record 1 min length videos and upload and load with player actions
+    --Audios = "", NOT USED NOW - I search a method to record 1 min length audios and upload and load with player actions
 }
