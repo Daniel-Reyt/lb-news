@@ -37,6 +37,7 @@ body {
     display: flex;
     justify-content: center;
     text-align: center;
+    align-items: center;
 }
 
 .card-container {
@@ -85,6 +86,7 @@ body {
     width: 100%;
     text-align: start;
 }
+
 
 .row-title {
     padding-top: 20%;
@@ -162,6 +164,10 @@ body {
     display: block;
 }
 
+#detailsbody {
+    display: block;
+}
+
 #form {
     display: none;
 }
@@ -222,6 +228,30 @@ body {
     text-align: center;
 }
 
+.button-details {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    font-size: 30px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.button-like {
+    width: 100px;
+    height: 100px;
+    border: none;
+    background-color: transparent;
+    font-size: 30px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 .button-validate:hover {
     cursor: pointer;
 }
@@ -233,4 +263,17 @@ body {
 .icon {
     width: 40px;
     height: 40px;
+}
+
+.span-like {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.icon-like {
+    margin-top: 20px;
+    width: 60px;
+    height: 60px;
 }

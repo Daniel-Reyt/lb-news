@@ -35,6 +35,18 @@ RegisterNUICallback('getLocales', function(data, cb)
     local locales = Config.locales[lang]
     cb(locales)
 end)
+RegisterNUICallback('likeNews', function(data, cb)
+    ESX.TriggerServerCallback('likeNews', function(liked)
+        print(json.encode(liked))
+        if liked ~= false and liked.affectedRows > 0 then
+            ESX.ShowNotification(Config.locales[Config.lang].LIKED, 'success')
+            cb(true)
+        else
+            ESX.ShowNotification(Config.locales[Config.lang].CANT_LIKE, 'error')
+            cb(false)
+        end
+    end, data.id)
+end)
 RegisterNUICallback('getDatas', function(data, cb)
     local xPlayer = ESX.GetPlayerData()
     ESX.TriggerServerCallback('getnews', function(news)

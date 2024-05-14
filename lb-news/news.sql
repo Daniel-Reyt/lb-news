@@ -12,3 +12,9 @@ INSERT INTO `job_grades`(`job_name`, `grade`, `name`, `label`, `salary`) VALUES 
 INSERT INTO `job_grades`(`job_name`, `grade`, `name`, `label`, `salary`) VALUES ('news', 1, 'reporter','Reporter',50)
 INSERT INTO `job_grades`(`job_name`, `grade`, `name`, `label`, `salary`) VALUES ('news', 2, 'chief','Chef Rédaction',50)
 INSERT INTO `job_grades`(`job_name`, `grade`, `name`, `label`, `salary`) VALUES ('news', 3, 'pdg','PDG',100)
+
+CREATE TABLE `liked_news` (
+  `id_news` int(11) NOT NULL,
+  `identifier` varchar(60) NOT NULL,
+  KEY `id_news` (`id_news`,`identifier`)
+)

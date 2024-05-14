@@ -1,6 +1,7 @@
 document.getElementById('button-back').addEventListener('click', () => {
     document.getElementById('form').style.display = 'none'
     document.getElementById('body').style.display = 'block'
+    document.getElementById('detailsbody').style.display = 'none'
     document.getElementById('form-update').style.display = 'none'
 })
 document.getElementById('button-add').addEventListener('click', () => {
@@ -34,6 +35,30 @@ window.addEventListener('load', function (e) {
                 color: ${locales.THEME.APP_COLOR} !important;
             }
 
+            #details-title {
+                color: ${locales.THEME.APP_COLOR} !important;
+                display: block !important;
+                width: 100% !important;
+                text-align: center !important;
+                margin-bottom: 20px !important;
+                font-size: x-large !important;
+            }
+            #details-description {
+                color: ${locales.THEME.APP_COLOR} !important;
+                display: block !important;
+                width: 100% !important;
+                text-align: center !important;
+                margin-bottom: 20px !important;
+                font-size: x-large !important;
+            }
+            #details-message {
+                color: ${locales.THEME.APP_COLOR} !important;
+                display: block !important;
+                width: 100% !important;
+                text-align: center !important;
+                margin-bottom: 20px !important;
+                font-size: x-large !important;
+            }
             #title-news-add {
                 background-color: ${locales.THEME.FORMINP_BACKGROUND} !important;
                 color: ${locales.THEME.FORMINP_COLOR} !important;
@@ -96,53 +121,94 @@ window.addEventListener('load', function (e) {
 
 
     $.post('https://lb-news/getDatas', JSON.stringify({}), function (data) {
-        if (data.canEdit == false) {
-            document.getElementById('button-add').style.display = 'none'
-            document.getElementById('button-back').style.display = 'none'
-        }
-        if (data.news.length == 0) {
-            document.getElementById('body').innerHTML += `
-            <div class="card">
-                <p class="card-title">Pas de news en vue</p>
-                <p class="card-description">Revenez quand les reporter en posteront</p>
-                <p class="card-message"></p>
-            </div>
-            `
-        } else {
-            for (let i = 0; i < data.news.length; i++) {
-                if (data.canEdit) {
-                    let image_html = ``
-                    if (data.news[i].image_url != null) {
-                        image_html = `<img src="${data.news[i].image_url}" width="300px" height="150">`
-                    }
-                    document.getElementById('body').innerHTML += `
-                    <div class="card">
-                        <p class="card-title">${data.news[i].title}</p>
-                        ${image_html}
-                        <p class="card-description">${data.news[i].description}</p>
-                        <p class="card-message">${data.news[i].message}</p>
-                        <button class="button-delete" id="button-delete" onclick="Deletenews(${data.news[i].id})"><img src="assets/delete.png" class="icon"></button>
-                        <button class="button-edit" id="button-edit" onclick="Editnews(${i}, ${data.news[i].id})"><img src="assets/edit.png" class="icon"></button>
-                    </div>
-                    `
-                } else {
-                    let image_html = ``
-                    if (data.news[i].image_url != null) {
-                        image_html = `<img src="${data.news[i].image_url}" width="300px" height="150">`
-                    }
-                    document.getElementById('body').innerHTML += `
-                    <div class="card">
-                        <p class="card-title">${data.news[i].title}</p>
-                        ${image_html}
-                        <p class="card-description">${data.news[i].description}</p>
-                        <p class="card-message">${data.news[i].message}</p>
-                    </div>
-                    `
-                }
-            }
-        }
+        addNewsHtml(data)
     })
 })
+
+function addNewsHtml(data) {
+    document.getElementById('detailsbody').innerHTML = ``
+    if (data.canEdit == false) {
+        document.getElementById('button-add').style.display = 'none'
+    }
+    if (data.news.length == 0) {
+        document.getElementById('body').innerHTML += `
+        <div class="card">
+            <p class="card-title">Pas de news en vue</p>
+            <p class="card-description">Revenez quand les reporter en posteront</p>
+            <p class="card-message"></p>
+        </div>
+        `
+    } else {
+        for (let i = 0; i < data.news.length; i++) {
+            if (data.canEdit) {
+                let image_html = ``
+                if (data.news[i].image_url != null) {
+                    image_html = `<img src="${data.news[i].image_url}" width="200px" height="150">`
+                }
+                document.getElementById('body').innerHTML += `
+                <div class="card">
+                    <div class="row" style="height: 150px">
+                        ${image_html}
+                        <p class="card-title" style="width: 200px;">${data.news[i].title}</p>
+                    </div>
+                    <button class="button-delete" id="button-delete" onclick="Deletenews(${data.news[i].id})"><img src="assets/delete.png" class="icon"></button>
+                    <button class="button-edit" id="button-edit" onclick="Editnews(${i}, ${data.news[i].id})"><img src="assets/edit.png" class="icon"></button>
+                    <button class="button-details" id="button-details" onclick="viewDetails('${data.news[i].title}', '${data.news[i].description}', '${data.news[i].message}', '${data.news[i].image_url}', ${data.news[i].id}, ${data.news[i].likes})"><img src="assets/details.png" class="icon"></button>
+                </div>
+                `
+            } else {
+                let image_html = ``
+                if (data.news[i].image_url != null) {
+                    image_html = `<img src="${data.news[i].image_url}" width="200px" height="150">`
+                }
+                document.getElementById('body').innerHTML += `
+                <div class="card">
+                    <div class="row" style="height: 150px">
+                        ${image_html}
+                        <p class="card-title" style="width: 200px;">${data.news[i].title}</p>
+                    </div>
+                    <button class="button-details" id="button-details" onclick="viewDetails('${data.news[i].title}', '${data.news[i].description}', '${data.news[i].message}', '${data.news[i].image_url}', ${data.news[i].id}, ${data.news[i].likes})"><img src="assets/details.png" class="icon"></button>
+                </div>
+                `
+            }
+        }
+    }
+}
+
+function viewDetails(title, description, message, image_url, news_id, news_like) {
+    document.getElementById('detailsbody').innerHTML = ``
+    let image_html = ``
+    if (image_url != null) {
+        image_html = `<img src="${image_url}" width="100%" height="200px">`
+        document.getElementById('detailsbody').innerHTML += `
+            ${image_html}
+            <p class="details-title" id="details-title" style="width: 100%;">${title}</p>
+            <p class="details-description" id="details-description" style="width: 100%;">${description}</p>
+            <p class="details-message" id="details-message" style="width: 100%;">${message}</p>
+            <button class="button-like" id="button-like" onclick="likeNews(${news_id})"><span class="span-like"><img src="assets/like.png" class="icon-like"><span id="span-like-count">${news_like}</span></span></button>
+            `
+    } else {
+        document.getElementById('detailsbody').innerHTML += `
+            ${image_html}
+            <p class="details-title" id="details-title" style="width: 100%;">${title}</p>
+            <p class="details-description" id="details-description" style="width: 100%;">${description}</p>
+            <p class="details-message" id="details-message  " style="width: 100%;">${message}</p>
+            <button class="button-like" id="button-like" onclick="likeNews(${news_id})"><span class="span-like"><img src="assets/like.png" class="icon-like"><span id="span-like-count">${news_like}</span></span></button>
+        `
+    }
+    document.getElementById('form').style.display = 'none'
+    document.getElementById('body').style.display = 'none'
+    document.getElementById('detailsbody').style.display = 'block'
+    document.getElementById('form-update').style.display = 'none'
+}
+
+function likeNews(news_id) {
+    //document.getElementById('span-like-count').innerText = parseInt(document.getElementById('span-like-count').innerText) + 1
+    $.post('https://lb-news/likeNews', JSON.stringify({ id: news_id }), function (liked) {
+        console.log(JSON.stringify(liked))
+    })
+}
+
 var data_img = {
     title: "",
     description: "",
@@ -162,51 +228,7 @@ document.getElementById('button-addnews').addEventListener('click', () => {
         if (added) {
             $.post('https://lb-news/refresh', JSON.stringify({}), function (data) {
                 document.getElementById('body').innerHTML = ""
-                if (data.canEdit == false) {
-                    document.getElementById('button-add').style.display = 'none'
-                    document.getElementById('button-back').style.display = 'none'
-                }
-                if (data.news.length == 0) {
-                    document.getElementById('body').innerHTML += `
-                            <div class="card">
-                                <p class="card-title">Pas de news en vue</p>
-                                <p class="card-description">Revenez quand les reporter en posteront</p>
-                                <p class="card-message"></p>
-                            </div>
-                        `
-                } else {
-                    for (let i = 0; i < data.news.length; i++) {
-                        if (data.canEdit) {
-                            let image_html = ``
-                            if (data.news[i].image_url != null) {
-                                image_html = `<img src="${data.news[i].image_url}" width="300px" height="150">`
-                            }
-                            document.getElementById('body').innerHTML += `
-                                <div class="card">
-                                    <p class="card-title">${data.news[i].title}</p>
-                                    ${image_html}
-                                    <p class="card-description">${data.news[i].description}</p>
-                                    <p class="card-message">${data.news[i].message}</p>
-                                    <button class="button-delete" id="button-delete" onclick="Deletenews(${data.news[i].id})"><img src="assets/delete.png" class="icon"></button>
-                                    <button class="button-edit" id="button-edit" onclick="Editnews(${i}, ${data.news[i].id})"><img src="assets/edit.png" class="icon"></button>
-                                </div>
-                                `
-                        } else {
-                            let image_html = ``
-                            if (data.news[i].image_url != null) {
-                                image_html = `<img src="${data.news[i].image_url}" width="300px" height="150">`
-                            }
-                            document.getElementById('body').innerHTML += `
-                                <div class="card">
-                                    <p class="card-title">${data.news[i].title}</p>
-                                    ${image_html}
-                                    <p class="card-description">${data.news[i].description}</p>
-                                    <p class="card-message">${data.news[i].message}</p>
-                                </div>
-                                `
-                        }
-                    }
-                }
+                addNewsHtml(data)
                 document.getElementById('form').style.display = 'none'
                 document.getElementById('body').style.display = 'block'
             })
@@ -219,51 +241,7 @@ function Deletenews(id_news) {
         if (data) {
             $.post('https://lb-news/getDatas', JSON.stringify({}), function (data) {
                 document.getElementById('body').innerHTML = ``
-                if (data.canEdit == false) {
-                    document.getElementById('button-add').style.display = 'none'
-                    document.getElementById('button-back').style.display = 'none'
-                }
-                if (data.news.length == 0) {
-                    document.getElementById('body').innerHTML += `
-                    <div class="card">
-                        <p class="card-title">Pas de news en vue</p>
-                        <p class="card-description">Revenez quand les reporter en posteront</p>
-                        <p class="card-message"></p>
-                    </div>
-                    `
-                } else {
-                    for (let i = 0; i < data.news.length; i++) {
-                        if (data.canEdit) {
-                            let image_html = ``
-                            if (data.news[i].image_url != null) {
-                                image_html = `<img src="${data.news[i].image_url}" width="300px" height="150">`
-                            }
-                            document.getElementById('body').innerHTML += `
-                            <div class="card">
-                                <p class="card-title">${data.news[i].title}</p>
-                                ${image_html}
-                                <p class="card-description">${data.news[i].description}</p>
-                                <p class="card-message">${data.news[i].message}</p>
-                                <button class="button-delete" id="button-delete" onclick="Deletenews(${data.news[i].id})"><img src="assets/delete.png" class="icon"></button>
-                                <button class="button-edit" id="button-edit" onclick="Editnews(${i}, ${data.news[i].id})"><img src="assets/edit.png" class="icon"></button>
-                            </div>
-                            `
-                        } else {
-                            let image_html = ``
-                            if (data.news[i].image_url != null) {
-                                image_html = `<img src="${data.news[i].image_url}" width="300px" height="150">`
-                            }
-                            document.getElementById('body').innerHTML += `
-                            <div class="card">
-                                <p class="card-title">${data.news[i].title}</p>
-                                ${image_html}
-                                <p class="card-description">${data.news[i].description}</p>
-                                <p class="card-message">${data.news[i].message}</p>
-                            </div>
-                            `
-                        }
-                    }
-                }
+                addNewsHtml(data)
             })
         }
     })
@@ -291,54 +269,7 @@ document.getElementById('button-updatenews').addEventListener('click', () => {
         if (updated) {
             $.post('https://lb-news/refresh', JSON.stringify({}), function (data) {
                 document.getElementById('body').innerHTML = ""
-                if (data.canEdit == false) {
-                    document.getElementById('button-add').style.display = 'none'
-                    document.getElementById('button-back').style.display = 'none'
-                    document.getElementById('button-delete').style.display = 'none'
-                    document.getElementById('button-edit').style.display = 'none'
-                }
-                if (data.news.length == 0) {
-                    document.getElementById('body').innerHTML += `
-                        <div class="card">
-                            <p class="card-title">Pas de news en vue</p>
-                            <p class="card-description">Revenez quand les reporter en posteront</p>
-                            <p class="card-message"></p>
-                        </div>
-                    `
-                } else {
-                    for (let i = 0; i < data.news.length; i++) {
-                        if (data.canEdit) {
-                            let image_html = ``
-                            if (data.news[i].image_url != null) {
-                                image_html = `<img src="${data.news[i].image_url}" width="300px" height="150">`
-                            }
-                            document.getElementById('body').innerHTML += `
-                            <div class="card">
-                                <p class="card-title">${data.news[i].title}</p>
-                                ${image_html}
-                                <p class="card-description">${data.news[i].description}</p>
-                                <p class="card-message">${data.news[i].message}</p>
-                                <button class="button-delete" id="button-delete" onclick="Deletenews(${data.news[i].id})"><img src="assets/delete.png" class="icon"></button>
-                                <button class="button-edit" id="button-edit" onclick="Editnews(${i}, ${data.news[i].id})"><img src="assets/edit.png" class="icon"></button>
-                            </div>
-                            `
-                        } else {
-                            let image_html = ``
-                            if (data.news[i].image_url != null) {
-                                image_html = `<img src="${data.news[i].image_url}" width="300px" height="150">`
-                            }
-                            document.getElementById('body').innerHTML += `
-                            <div class="card">
-                                <p class="card-title">${data.news[i].title}</p>
-                                ${image_html}
-                                <p class="card-description">${data.news[i].description}</p>
-                                <p class="card-message">${data.news[i].message}</p>
-                            </div>
-                            `
-                        }
-
-                    }
-                }
+                addNewsHtml(data)
                 document.getElementById('form').style.display = 'none'
                 document.getElementById('form-update').style.display = 'none'
                 document.getElementById('body').style.display = 'block'
